@@ -46,10 +46,13 @@
 }
 
 #gpsIconImg {
-  width: 20px;
-  height: 20px;
-  touch-action: none;
+  width: 24px;
+  height: 24px;
+  fill: white;
+  transition: fill 0.3s ease;
+  pointer-events: none;
 }
+
 
     .gps-marker {
       position:relative; width:30px; height:30px;touch-action: none;
@@ -159,12 +162,10 @@
 <div id="gpsMessage">Anda berada di luar kawasan..</div>
 
 <button id="gpsButton" title="Toggle GPS Mode">
-    <img id="gpsIconImg"
-         src="https://www.svgrepo.com/download/421169/gps-navigation-position.svg"
-         alt="GPS"/>
+  <svg id="gpsIconImg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+    <path d="M12 8a4 4 0 100 8 4 4 0 000-8zm8 3h-2.07A6.002 6.002 0 0013 6.07V4h-2v2.07A6.002 6.002 0 006.07 11H4v2h2.07A6.002 6.002 0 0011 17.93V20h2v-2.07A6.002 6.002 0 0017.93 13H20v-2h-2z"/>
+  </svg>
 </button>
-
-
 
 <div class="search-container" id="searchContainer">
   <input type="text" class="search-input" id="searchInput" placeholder="Cari...">
