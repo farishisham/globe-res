@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Lot Kerja Har Padi Enterprise</title>
+  <title>Globe Resources</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="apple-touch-icon" sizes="180x180" href="harpadi.png">
   <link rel="icon" href="favicon.png" type="image/png">
@@ -134,7 +134,7 @@
 <body>
 
 <div id="header">
-  <h1>LOT KERJA HAR PADI ENTERPRISE</h1>
+  <h1> </h1>
 </div>
 
 <div id="map"></div>
@@ -144,10 +144,10 @@
 <div id="gpsMessage">Anda berada di luar kawasan..</div>
 
 <button id="gpsButton" title="Toggle GPS Mode">
-  <img id="gpsIconImg"
-       src="https://www.svgrepo.com/download/421169/gps-navigation-position.svg"
-       alt="GPS"/>
-</button>
+    <img id="gpsIconImg"
+         src="https://www.svgrepo.com/download/421169/gps-navigation-position.svg"
+         alt="GPS"/>
+  </button>
 
 <div class="search-container" id="searchContainer">
   <input type="text" class="search-input" id="searchInput" placeholder="Cari...">
@@ -235,8 +235,8 @@ const map = new maplibregl.Map({
 });
 
 // Limit map bounds
-map.setMaxBounds([[102.66830, 2.21776], [102.69816, 2.25551]]);
-const boundsPolygon = turf.bboxPolygon([102.66830, 2.21776, 102.69816, 2.25551]);
+map.setMaxBounds([[103.26417, 3.54167], [103.29417, 3.58167]]);
+const boundsPolygon = turf.bboxPolygon([103.26417, 3.54167, 103.29417, 3.58167]);
 
 // GPS and Marker
 let gpsMode = 1, watchId = null, marker = null;
