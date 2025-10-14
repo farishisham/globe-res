@@ -143,11 +143,12 @@
 
 <div id="gpsMessage">Anda berada di luar kawasan..</div>
 
-<button id="gpsButton" title="Toggle GPS Mode">
-    <img id="gpsIconImg"
-         src="https://www.svgrepo.com/download/421169/gps-navigation-position.svg"
-         alt="GPS"/>
-  </button>
+  <button id="gpsButton" title="Toggle GPS Mode" class="gps-btn">
+  <svg viewBox="0 0 24 24">
+    <path d="M12 2a1 1 0 0 1 1 1v1.07A8.001 8.001 0 0 1 20.93 11H22a1 1 0 1 1 0 2h-1.07A8.001 8.001 0 0 1 13 20.93V22a1 1 0 1 1-2 0v-1.07A8.001 8.001 0 0 1 3.07 13H2a1 1 0 1 1 0-2h1.07A8.001 8.001 0 0 1 11 3.07V2a1 1 0 0 1 1-1zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+  </svg>
+</button>
+
 
 <div class="search-container" id="searchContainer">
   <input type="text" class="search-input" id="searchInput" placeholder="Cari...">
@@ -744,7 +745,7 @@ function highlightFeature(fPartial) {
     const tarikhTanam = parseTarikhTanam(f);
     const usiaText = formatUsiaBenih(tarikhTanam);
 //console.log(days); // e.g. → 16 (if today is 18 May 2025)
-    popupHTML += `<br>Benih: ${benih || 'Tiada info'}`;
+    popupHTML += `<br>Benih: ${benih || 'Tiada info'}<br>${tray} tray atau ${tray*3} gulung`;
     
     if (tabur) popupHTML += `<br>${tabur}`;
     //if (benih) popupHTML += `<br>Benih: ${benih}`
