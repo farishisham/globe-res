@@ -781,9 +781,19 @@ function highlightFeature(fPartial) {
     const tarikhTanam = parseTarikhTanam(f);
     const usiaText = formatUsiaBenih(tarikhTanam);
 //console.log(days); // e.g. → 16 (if today is 18 May 2025)
+    if (tabur) popupHTML += `<br>${tabur}`;
+    //if (benih) popupHTML += `<br>Benih: ${benih}`
+    if (f.properties.description?.value?.toLowerCase().includes('calit')) popupHTML += `
+    <br>Tarikh tanam: ${tarikhTanam}
+    <br>HLT: ${usiaText}
+    <br>
+    `;
+
+    
     popupHTML += `
-    <br>Benih: ${benih || 'Tiada info'}
     <br>${tray*3} tray
+    <br>Benih: ${benih || 'Tiada info'}
+    <br>
     <br>Nama Pemilik Lot: 
     <br>No. HP:
     <br>
@@ -791,10 +801,7 @@ function highlightFeature(fPartial) {
     <br>No. HP:
     `;
     
-    if (tabur) popupHTML += `<br>${tabur}`;
-    //if (benih) popupHTML += `<br>Benih: ${benih}`
-    if (f.properties.description?.value?.toLowerCase().includes('calit')) popupHTML += `<br>Tarikh tanam: ${tarikhTanam}<br>HLT: ${usiaText}`;
-  }
+      }
 
   new maplibregl.Popup({ closeButton: false })
     .setLngLat(center)
