@@ -777,11 +777,19 @@ function highlightFeature(fPartial) {
   if (isBlok) {
     const benih = parseBenihType(f);
     const tabur = parseTaburInfo(f);
-    const tray = Math.round(area * 35);
+    const tray = Math.round(area * 100/3);
     const tarikhTanam = parseTarikhTanam(f);
     const usiaText = formatUsiaBenih(tarikhTanam);
 //console.log(days); // e.g. → 16 (if today is 18 May 2025)
-    popupHTML += `<br>Benih: ${benih || 'Tiada info'}<br>${tray} tray atau ${tray*3} gulung`;
+    popupHTML += `
+    <br>Benih: ${benih || 'Tiada info'}
+    <br>${tray*3} tray
+    <br>Nama Pemilik Lot: 
+    <br>No. HP:
+    <br>
+    <br>Nama Pengusaha Lot:
+    <br>No. HP:
+    `;
     
     if (tabur) popupHTML += `<br>${tabur}`;
     //if (benih) popupHTML += `<br>Benih: ${benih}`
