@@ -784,14 +784,15 @@ function highlightFeature(fPartial) {
     if (tabur) popupHTML += `<br>${tabur}`;
     //if (benih) popupHTML += `<br>Benih: ${benih}`
     if (f.properties.description?.value?.toLowerCase().includes('calit')) popupHTML += `
+    <br>${tray*3} tray
     <br>Tarikh tanam: ${tarikhTanam}
     <br>HLT: ${usiaText}
-    <br>
+  
     `;
 
     
     popupHTML += `
-    <br>${tray*3} tray
+    
     <br>Benih: ${benih || 'Tiada info'}
     <br>
     <br>Nama Pemilik Lot: 
