@@ -750,11 +750,15 @@ function highlightFeature(fPartial) {
 
   const area = (turf.area(f) / 4046.86).toFixed(2);
   const areahectare = (turf.area(f)*0.405 / 4046.86).toFixed(2);
-  const isBlok = !f.properties.name?.toLowerCase().includes('blok'); // Adjust logic if needed
+  const isBlok = !f.properties.name?.toLowerCase().includes('lot'); // Adjust logic if needed
 
   let popupHTML = `
-    <strong>${f.properties.name}</strong><br>
-    ${area} ekar [${areahectare} hektar]
+    <strong>${f.properties.name}</strong>
+    <br>${area} ekar [${areahectare} hektar]
+    <br>Nama Pemilik Lot: 
+    <br>No. HP:
+    <br>Nama Pengusaha Lot:
+    <br>No. HP:
   `;
 
   if (isBlok) {
@@ -778,12 +782,8 @@ function highlightFeature(fPartial) {
     <br>Benih: ${benih || 'Tiada info'}
     <br>Tarikh tanam: ${tarikhTanam}
     <br>HLT: ${usiaText}
-    <br>
-    <br>Nama Pemilik Lot: 
-    <br>No. HP:
-    <br>
-    <br>Nama Pengusaha Lot:
-    <br>No. HP:
+    
+    
     
     `;
     
