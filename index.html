@@ -764,6 +764,17 @@ function highlightFeature(fPartial) {
     const tray = Math.round(area * 100/3);
     const tarikhTanam = parseTarikhTanam(f);
     const usiaText = formatUsiaBenih(tarikhTanam);
+    
+    if (tabur) popupHTML += `<br>${tabur}`;
+    //if (benih) popupHTML += `<br>Benih: ${benih}`
+    if (f.properties.description?.value?.toLowerCase().includes('calit')) 
+    popupHTML += `
+    
+    <br>Tarikh tanam: ${tarikhTanam}
+    <br>HLT: ${usiaText}
+    
+    `;
+    
     popupHTML += `
     <br>${tray*3} tray
     <br>Benih: ${benih || 'Tiada info'}
@@ -777,17 +788,7 @@ function highlightFeature(fPartial) {
     
 //console.log(days); // e.g. → 16 (if today is 18 May 2025)
 
-    if (tabur) popupHTML += `<br>${tabur}`;
-    //if (benih) popupHTML += `<br>Benih: ${benih}`
-    if (f.properties.description?.value?.toLowerCase().includes('calit')) 
-    popupHTML += `
-    
-    <br>Tarikh tanam: ${tarikhTanam}
-    <br>HLT: ${usiaText}
-    
-    
-    
-    `;
+
     
       }
 
