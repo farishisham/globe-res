@@ -154,11 +154,15 @@
   box-shadow: none !important;
 }
   
+/* Force all blok name markers to be bold */
 .maplibregl-marker div {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  font-weight: inherit !important;
+  font-weight: 900 !important;
+  font-family: 'Helvetica Neue', Arial, 'Arial Black', sans-serif !important;
+  color: white !important;
+  text-shadow: 1px 1px 2px black !important;
 }
   
   </style>
@@ -637,7 +641,7 @@ function showBlokNames() {
     const blokName = f.properties.name;
     if (!isBlok || !blokName) return;
 
-    // Calculate label center
+    // Calculate center
     const center1 = turf.centroid(f).geometry.coordinates;
     const center2 = turf.pointOnFeature(f).geometry.coordinates;
     const center = [
@@ -645,7 +649,7 @@ function showBlokNames() {
       (center1[1] + center2[1]) / 2
     ];
 
-    // Extract benih type
+    // Extract benih
     const rawHTML = f.properties?.description?.value || '';
     const parser = new DOMParser();
     const doc = parser.parseFromString(rawHTML, 'text/html');
@@ -653,46 +657,47 @@ function showBlokNames() {
     const match = text.match(/benih\s+(.+?)(?=\s+tarikh|$)/i);
     const benih = match ? match[1].trim().toUpperCase() : '';
 
-    // ✅ Build element fully via JS (no innerHTML)
-    const wrapper = document.createElement('div');
-    wrapper.style.textAlign = 'center';
-    wrapper.style.lineHeight = '1.1';
-    wrapper.style.fontSize = '11px';
-    wrapper.style.color = 'white';
-    wrapper.style.fontFamily = 'Helvetica, sans-serif';
-    wrapper.style.textShadow = '1px 1px 2px black';
-    wrapper.style.transform = 'translate(-50%, -50%)';
-    wrapper.style.pointerEvents = 'none';
-    wrapper.style.background = 'transparent';
-    wrapper.style.border = 'none';
-    wrapper.style.boxShadow = 'none';
-    wrapper.style.padding = '0';
-    wrapper.style.margin = '0';
-    wrapper.style.whiteSpace = 'nowrap';
+    // Create label element
+    const el = document.createElement('div');
+    el.style.textAlign = 'center';
+    el.style.lineHeight = '1.2';
+    el.style.color = 'white';
+    el.style.fontFamily = `'Helvetica Neue', Arial, 'Arial Black', sans-serif`;
+    el.style.textShadow = '1px 1px 2px black';
+    el.style.transform = 'translate(-50%, -50%)';
+    el.style.pointerEvents = 'none';
+    el.style.background = 'transparent';
+    el.style.border = 'none';
+    el.style.boxShadow = 'none';
+    el.style.padding = '0';
+    el.style.margin = '0';
+    el.style.fontWeight = '900'; // ✅ Force bold for everything
 
-    // ✅ Make blok name bold
-    const blokEl = document.createElement('div');
-    blokEl.textContent = blokName;
-    blokEl.style.fontWeight = '900';  // strong bold
-    blokEl.style.letterSpacing = '0.3px';
+    // Create name (bold)
+    const nameDiv = document.createElement('div');
+    nameDiv.textContent = blokName;
+    nameDiv.style.fontSize = '12.5px';
+    nameDiv.style.fontWeight = '900'; // ✅ Force bold again
+    nameDiv.style.letterSpacing = '0.2px';
 
-    // ✅ Benih line (normal)
-    const benihEl = document.createElement('div');
-    benihEl.textContent = benih;
-    benihEl.style.fontWeight = 'normal';
+    // Create benih (normal)
+    const benihDiv = document.createElement('div');
+    benihDiv.textContent = benih;
+    benihDiv.style.fontSize = '11px';
+    benihDiv.style.fontWeight = '400';
 
-    // Combine
-    wrapper.appendChild(blokEl);
-    wrapper.appendChild(benihEl);
+    el.appendChild(nameDiv);
+    el.appendChild(benihDiv);
 
-    const marker = new maplibregl.Marker({ element: wrapper })
+    const marker = new maplibregl.Marker({ element: el })
       .setLngLat(center)
       .addTo(map);
 
-    // Ensure no background leaks from wrapper
+    // Force container styles too
     marker.getElement().style.background = 'transparent';
     marker.getElement().style.border = 'none';
     marker.getElement().style.boxShadow = 'none';
+    marker.getElement().style.fontWeight = '900'; // ✅ enforce bold on wrapper
 
     blokNameMarkers.push(marker);
   });
