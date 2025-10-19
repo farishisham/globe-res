@@ -621,7 +621,7 @@ function showBlokNumbers() {
   
 
 function showBlokNames() {
-  // Clear existing markers
+  // Remove existing markers
   blokNameMarkers.forEach(m => m.remove());
   blokNameMarkers = [];
 
@@ -645,21 +645,29 @@ function showBlokNames() {
       const match = text.match(/benih\s+(.+?)(?=\s+tarikh|$)/i);
       const benih = match ? match[1].trim().toUpperCase() : '';
 
-      // Create marker element
+      // Create label element
       const el = document.createElement('div');
       el.innerHTML = `
         <div style="text-align:center; line-height:1.1;">
-          <div style="font-weight:bold;">${blokName}</div>
+          <div style="font-weight:bold;">${blokName}</div>   <!-- ✅ Make blok name bold -->
           <div style="font-weight:normal;">${benih}</div>
         </div>
       `;
-      el.style.fontSize = '10px';
+
+      // Label styling
+      el.style.fontSize = '11px';
       el.style.color = 'white';
+      el.style.fontFamily = 'Helvetica, sans-serif';
       el.style.textShadow = '1px 1px 2px black';
       el.style.transform = 'translate(-50%, -50%)';
       el.style.pointerEvents = 'none';
+      el.style.background = 'transparent';   // ✅ No background box
+      el.style.border = 'none';
+      el.style.boxShadow = 'none';
+      el.style.padding = '0';
+      el.style.margin = '0';
 
-      const marker = new maplibregl.Marker(el)
+      const marker = new maplibregl.Marker({ element: el })
         .setLngLat(center)
         .addTo(map);
 
