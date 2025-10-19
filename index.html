@@ -561,7 +561,7 @@ function updateFloatingHudVisibility() {
 }
 
 function showBlokNumbers() {
-  // Clear existing markers
+  // Remove existing markers
   blokNumberMarkers.forEach(m => m.remove());
   blokNumberMarkers = [];
 
@@ -570,7 +570,7 @@ function showBlokNumbers() {
     const name = f.properties.name;
     if (!isSawahRing || !name) return;
 
-    // Compute label center
+    // Calculate label center
     const center1 = turf.centroid(f).geometry.coordinates;
     const center2 = turf.pointOnFeature(f).geometry.coordinates;
     const center = [
@@ -580,7 +580,7 @@ function showBlokNumbers() {
 
     // Create label element
     const el = document.createElement('div');
-    el.textContent = name; // exact name
+    el.textContent = name;
     el.style.fontSize = '13px';
     el.style.color = 'white';
     el.style.fontWeight = 'bold';
@@ -588,21 +588,31 @@ function showBlokNumbers() {
     el.style.textShadow = '1px 1px 2px black';
     el.style.transform = 'translate(-50%, -50%)';
     el.style.pointerEvents = 'none';
-    el.style.background = 'transparent';   // ✅ ensure no background
-    el.style.border = 'none';              // ✅ no border
-    el.style.boxShadow = 'none';           // ✅ remove shadow box
-    el.style.margin = '0';
+    el.style.background = 'transparent';
+    el.style.border = 'none';
+    el.style.boxShadow = 'none';
     el.style.padding = '0';
+    el.style.margin = '0';
+    el.style.whiteSpace = 'nowrap';
 
-    const marker = new maplibregl.Marker({ element: el })
+    const marker = new maplibregl.Marker({
+      element: el,
+      anchor: 'center'
+    })
       .setLngLat(center)
       .addTo(map);
+
+    // Extra: make sure the marker element wrapper is also transparent
+    marker.getElement().style.background = 'transparent';
+    marker.getElement().style.border = 'none';
+    marker.getElement().style.boxShadow = 'none';
 
     blokNumberMarkers.push(marker);
   });
 
   updateBlokLabelScaling();
 }
+  
 
 function showBlokNames() {
   // Clear existing markers
